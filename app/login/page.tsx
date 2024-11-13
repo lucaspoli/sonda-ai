@@ -41,7 +41,7 @@ const LoginPage = async () => {
               className="mb-9"
               draggable="false"
             />
-            <CardTitle>Welcome</CardTitle>
+            <CardTitle className="text-3xl font-bold">Welcome</CardTitle>
             <CardDescription className="text-base">
               Sonda AI is an intelligent financial platform that monitors your
               transactions and provides personalized insights, making budget

@@ -8,8 +8,17 @@ import {
 } from "../_components/ui/card";
 import { Button } from "../_components/ui/button";
 import { LogInIcon } from "lucide-react";
+import { SignInButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-const LoginPage = () => {
+const LoginPage = async () => {
+  const { userId } = await auth();
+
+  if (userId) {
+    redirect("/");
+  }
+
   return (
     <div className="grid h-full grid-cols-2 p-7">
       <div className="relative h-full w-full">
@@ -18,6 +27,7 @@ const LoginPage = () => {
           alt="Background login page"
           fill
           className="rounded-3xl object-cover"
+          draggable="false"
         />
       </div>
       <div className="flex h-full flex-col items-center justify-center">
@@ -29,6 +39,7 @@ const LoginPage = () => {
               width={123}
               height={30}
               className="mb-9"
+              draggable="false"
             />
             <CardTitle>Welcome</CardTitle>
             <CardDescription className="text-base">
@@ -38,10 +49,12 @@ const LoginPage = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button variant={"secondary"} className="w-full p-6 text-base">
-              <LogInIcon />
-              Log In or Create Account
-            </Button>
+            <SignInButton>
+              <Button variant={"secondary"} className="w-full p-6 text-base">
+                <LogInIcon />
+                Log In or Create Account
+              </Button>
+            </SignInButton>
           </CardContent>
         </Card>
       </div>

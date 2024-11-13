@@ -1,1 +1,0 @@
-DATABASE_URL="postgresql://<user-psql>:<pass-psql>@localhost:5432/<db-name>?schema=public"

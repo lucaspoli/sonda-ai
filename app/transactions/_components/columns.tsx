@@ -5,28 +5,10 @@ import { ColumnDef } from "@tanstack/react-table";
 import TransactionTypeBadge from "./type-badge";
 import { Button } from "@/app/_components/ui/button";
 import { PencilIcon, TrashIcon } from "lucide-react";
-
-const TRANSACTION_CATEGORY_LABELS = {
-  EDUCATION: "Education",
-  ENTERTAINMENT: "Entertainment",
-  FOOD: "Food",
-  HEALTH: "Health",
-  HOUSING: "Housing",
-  OTHER: "Others",
-  SALARY: "Salary",
-  TRANSPORTATION: "Transportation",
-  UTILITY: "Utilities",
-};
-
-const TRANSACTION_PAYMENT_METHOD_LABELS = {
-  BANK_TRANSFER: "Bank Transfer",
-  BANK_SLIP: "Bank Slip",
-  CASH: "Cash",
-  CREDIT_CARD: "Credit Card",
-  DEBIT_CARD: "Debit Card",
-  OTHER: "Others",
-  PIX: "Pix",
-};
+import {
+  TRANSACTION_CATEGORY_LABELS,
+  TRANSACTION_PAYMENT_METHOD_LABELS,
+} from "@/app/_lib/_utils/transactions";
 
 export const transactionColumns: ColumnDef<Transaction>[] = [
   {
@@ -63,13 +45,13 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
       }),
   },
   {
-    accessorKey: "amout",
-    header: "Amout",
+    accessorKey: "amount", // Corrigido para "amount" se necessário
+    header: "Amount",
     cell: ({ row: { original: transaction } }) =>
       new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
-      }).format(Number(transaction.amout)),
+      }).format(Number(transaction.amount)), // Converte para número antes de formatar
   },
   {
     accessorKey: "actions",

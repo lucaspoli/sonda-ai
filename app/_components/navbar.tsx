@@ -53,7 +53,7 @@ const Navbar = () => {
         </Link>
       </div>
 
-      <div>
+      <div className="flex items-center">
         <UserButton showName />
       </div>
     </nav>

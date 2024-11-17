@@ -33,7 +33,7 @@ export const upsertTransaction = async (params: upsertTransactionParams) => {
     update: { ...params, userID },
     create: { ...params, userID },
     where: {
-      id: params.id,
+      id: params?.id ?? "",
     },
   });
 

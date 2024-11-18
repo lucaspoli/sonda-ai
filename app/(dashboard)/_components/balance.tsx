@@ -51,6 +51,7 @@ const Balance = async ({ month }: BalanceProps) => {
         title="Balance"
         amount={balance}
         size={"large"}
+        bg="bg"
       />
 
       <div className="grid grid-cols-3 gap-6">
@@ -59,6 +60,7 @@ const Balance = async ({ month }: BalanceProps) => {
           title="Invested"
           amount={investmentsTotal}
           size={"small"}
+          bg="bg"
         />
         <SummaryCards
           icon={<TrendingUpIcon size={14} className="text-green-600" />}

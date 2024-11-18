@@ -9,7 +9,12 @@ interface SummaryCardProps {
   size?: "small" | "large";
 }
 
-const SummaryCards = ({ icon, title, amount, size }: SummaryCardProps) => {
+const SummaryCards = ({
+  icon,
+  title,
+  amount,
+  size = "small",
+}: SummaryCardProps) => {
   return (
     <div className="space-y-6">
       <Card>

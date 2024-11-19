@@ -6,6 +6,8 @@ import TimeSelect from "./_components/time-select";
 import { redirect } from "next/navigation";
 import Balance from "./_components/balance";
 import { isMatch } from "date-fns";
+import TransactionPieChart from "./_components/transaction-pie-charts";
+import getDashboard from "../_lib/_data/get-dashboard";
 
 interface HomePageProps {
   searchParams: { month?: string };
@@ -25,6 +27,8 @@ const HomePage = async ({ searchParams: { month } }: HomePageProps) => {
     redirect(`/?month=${currentMonth}`);
   }
 
+  const dashboard = await getDashboard(month);
+
   return (
     <>
       <Navbar />
@@ -33,7 +37,16 @@ const HomePage = async ({ searchParams: { month } }: HomePageProps) => {
           <PageTitle>Dashboard</PageTitle>
           <TimeSelect />
         </div>
-        <Balance month={month} />
+
+        <div className="grid grid-cols-[2fr,1fr]">
+          <div className="flex flex-col gap-6">
+            <Balance month={month} {...dashboard} />
+
+            <div className="grid grid-cols-3 grid-rows-1 gap-6">
+              <TransactionPieChart {...dashboard} />
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -1,4 +1,3 @@
-//app\(dashboard)\page.tsx
 import { auth } from "@clerk/nextjs/server";
 import Navbar from "../_components/navbar";
 import PageTitle from "../_components/page-title";

@@ -8,6 +8,7 @@ import Balance from "./_components/balance";
 import { isMatch } from "date-fns";
 import TransactionPieChart from "./_components/transaction-pie-charts";
 import getDashboard from "../_lib/_data/get-dashboard";
+import ExpensesPerCategory from "./_components/expenses-per-category";
 
 interface HomePageProps {
   searchParams: { month?: string };
@@ -44,6 +45,9 @@ const HomePage = async ({ searchParams: { month } }: HomePageProps) => {
 
             <div className="grid grid-cols-3 grid-rows-1 gap-6">
               <TransactionPieChart {...dashboard} />
+              <ExpensesPerCategory
+                expensesPerCategory={dashboard.totalExpensePerCategory}
+              />
             </div>
           </div>
         </div>

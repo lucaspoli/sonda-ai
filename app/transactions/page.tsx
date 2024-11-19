@@ -13,22 +13,28 @@ const TransactionsPage = async () => {
   if (!userId) {
     redirect("/login");
   }
-
   const transactions = await db.transaction.findMany({
     where: {
       userID: userId,
+    },
+    orderBy: {
+      date: "desc",
     },
   });
   return (
     <>
       <Navbar />
+
       <div className="space-y-4 overflow-hidden p-8">
         <div className="flex w-full items-center justify-between">
           <PageTitle>Transactions</PageTitle>
           <AddTransactionButton />
         </div>
-        <ScrollArea>
-          <DataTable columns={transactionColumns} data={transactions} />
+        <ScrollArea className="h-full">
+          <DataTable
+            columns={transactionColumns}
+            data={JSON.parse(JSON.stringify(transactions))}
+          />
         </ScrollArea>
       </div>
     </>

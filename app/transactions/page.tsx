@@ -6,6 +6,7 @@ import PageTitle from "../_components/page-title";
 import Navbar from "../_components/navbar";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { ScrollArea } from "../_components/ui/scroll-area";
 
 const TransactionsPage = async () => {
   const { userId } = await auth();
@@ -21,14 +22,14 @@ const TransactionsPage = async () => {
   return (
     <>
       <Navbar />
-      <div className="space-y-4 p-8">
+      <div className="space-y-4 overflow-hidden p-8">
         <div className="flex w-full items-center justify-between">
           <PageTitle>Transactions</PageTitle>
           <AddTransactionButton />
         </div>
-        <div>
+        <ScrollArea>
           <DataTable columns={transactionColumns} data={transactions} />
-        </div>
+        </ScrollArea>
       </div>
     </>
   );

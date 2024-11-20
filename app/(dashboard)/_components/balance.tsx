@@ -30,6 +30,7 @@ const Balance = async ({
         amount={balance}
         size={"large"}
         bg="bg"
+        userCanAddTransaction={userCanAddTransaction}
       />
 
       <div className="grid grid-cols-3 gap-6">
@@ -39,7 +40,6 @@ const Balance = async ({
           amount={investmentsTotal}
           size={"small"}
           bg="bg"
-          userCanAddTransaction={userCanAddTransaction}
         />
         <SummaryCards
           icon={<TrendingUpIcon size={14} className="text-green-600" />}

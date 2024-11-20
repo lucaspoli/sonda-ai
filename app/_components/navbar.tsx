@@ -3,14 +3,17 @@
 import { UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { buttonVariants } from "@/app/_components/ui/button";
 
 const Navbar = () => {
-  const pathname = usePathname();
+  const links = [
+    { href: "/", label: "Dashboard" },
+    { href: "/transactions", label: "Transactions" },
+    { href: "/subscription", label: "Subscription" },
+  ];
 
   return (
-    <nav className="flex justify-between border-b border-solid px-8 py-4">
+    <nav className="flex items-center justify-between border-b border-solid px-8 py-4">
       <div className="flex items-center gap-5">
         <Link href="/">
           <Image
@@ -21,41 +24,18 @@ const Navbar = () => {
             className="mr-5"
           />
         </Link>
-        <Link
-          href="/"
-          className={`${
-            pathname === "/"
-              ? `${buttonVariants({ variant: "secondary" })} font-extrabold`
-              : buttonVariants({ variant: "ghost" })
-          }`}
-        >
-          Dashboard
-        </Link>
-        <Link
-          href="/transactions"
-          className={`${
-            pathname === "/transactions"
-              ? `${buttonVariants({ variant: "secondary" })} font-extrabold`
-              : buttonVariants({ variant: "ghost" })
-          }`}
-        >
-          Transactions
-        </Link>
-        <Link
-          href="/subscription"
-          className={`${
-            pathname === "/subscription"
-              ? `${buttonVariants({ variant: "secondary" })} font-extrabold`
-              : buttonVariants({ variant: "ghost" })
-          }`}
-        >
-          Subscription
-        </Link>
+        {links.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={buttonVariants({ variant: "ghost" })} // Deixe todos os links consistentes
+          >
+            {link.label}
+          </Link>
+        ))}
       </div>
 
-      <div className="flex items-center">
-        <UserButton showName />
-      </div>
+      <UserButton showName />
     </nav>
   );
 };

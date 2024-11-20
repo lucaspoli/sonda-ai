@@ -33,7 +33,7 @@ const DeleteTransactionButton = ({
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
+      <AlertDialogTrigger asChild>
         <Button variant="ghost" size="icon" className="text-muted-foreground">
           <TrashIcon />
         </Button>

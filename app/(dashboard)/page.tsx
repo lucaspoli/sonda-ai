@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import Navbar from "../_components/navbar";
 import PageTitle from "../_components/page-title";
 import TimeSelect from "./_components/time-select";
@@ -10,6 +10,7 @@ import getDashboard from "../_lib/_data/get-dashboard";
 import ExpensesPerCategory from "./_components/expenses-per-category";
 import LastTransactions from "./_components/last-transactions";
 import { canUserAddTransaction } from "../_lib/_data/can-user-add-transaction";
+import AiReportButton from "./_components/ai-report-button";
 
 interface HomePageProps {
   searchParams: { month?: string };
@@ -31,13 +32,22 @@ const HomePage = async ({ searchParams: { month } }: HomePageProps) => {
 
   const dashboard = await getDashboard(month);
   const userCanAddTransaction = await canUserAddTransaction();
+  const user = await (await clerkClient()).users.getUser(userId);
   return (
     <>
       <Navbar />
       <div className="flex flex-col space-y-4 overflow-hidden p-8">
         <div className="flex w-full items-center justify-between">
           <PageTitle>Dashboard</PageTitle>
-          <TimeSelect />
+          <div className="flex items-center gap-3">
+            <AiReportButton
+              month={month}
+              hasPremiumPlan={
+                user.publicMetadata.subscriptionPlan === "premium"
+              }
+            />
+            <TimeSelect />
+          </div>
         </div>
 
         <div className="grid grid-cols-[2fr,1fr] gap-6 overflow-hidden">

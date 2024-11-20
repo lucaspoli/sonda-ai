@@ -25,7 +25,7 @@ const AcquirePlanButton = () => {
   if (hasPremiumPlan) {
     const stripePortalLink = `${process.env.NEXT_PUBLIC_STRIPE_CUSTOMER_PORTAL_URL as string}?prefilled_email=${user.emailAddresses[0].emailAddress}`;
     return (
-      <Button className="w-full rounded-full font-bold" variant="link">
+      <Button className="w-full rounded-full font-bold" variant="link" asChild>
         <Link href={stripePortalLink}>Manage plan</Link>
       </Button>
     );

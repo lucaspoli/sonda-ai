@@ -12,6 +12,7 @@ interface BalanceProps {
   depositsTotal: number;
   investmentsTotal: number;
   expensesTotal: number;
+  userCanAddTransaction?: boolean;
 }
 
 const Balance = async ({
@@ -19,6 +20,7 @@ const Balance = async ({
   depositsTotal,
   investmentsTotal,
   expensesTotal,
+  userCanAddTransaction,
 }: BalanceProps) => {
   return (
     <div className="space-y-6">
@@ -37,6 +39,7 @@ const Balance = async ({
           amount={investmentsTotal}
           size={"small"}
           bg="bg"
+          userCanAddTransaction={userCanAddTransaction}
         />
         <SummaryCards
           icon={<TrendingUpIcon size={14} className="text-green-600" />}

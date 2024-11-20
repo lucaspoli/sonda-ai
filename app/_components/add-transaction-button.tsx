@@ -24,20 +24,22 @@ const AddTransactionButton = ({
     <>
       <TooltipProvider>
         <Tooltip>
-          <TooltipTrigger>
-            <Button
-              className="rounded-full px-6 text-sm font-bold"
-              onClick={() => setDialogIsOpen(true)}
-              disabled={!userCanAddTransaction}
-            >
-              <ArrowDownUpIcon />
-              Add Transaction
-            </Button>
+          <TooltipTrigger asChild>
+            <span>
+              <Button
+                className="rounded-full px-6 text-sm font-bold"
+                onClick={() => setDialogIsOpen(true)}
+                disabled={!userCanAddTransaction}
+              >
+                <ArrowDownUpIcon />
+                Add Transaction
+              </Button>
+            </span>
           </TooltipTrigger>
           <TooltipContent>
             {!userCanAddTransaction
-              ? "Add new transaction"
-              : "You have reached the transaction limit for the Free Plan."}
+              ? "You have reached the transaction limit for the Free Plan."
+              : "Add new transaction"}
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>

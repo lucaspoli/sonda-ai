@@ -17,13 +17,14 @@ import { useState } from "react";
 import { ScrollArea } from "@/app/_components/ui/scroll-area";
 import Markdown from "react-markdown";
 import { toast } from "sonner";
+import Link from "next/link";
 
 interface AiReportButtonProps {
   hasPremiumPlan: boolean;
   month: string;
 }
 
-const AiReportButton = ({ month }: AiReportButtonProps) => {
+const AiReportButton = ({ month, hasPremiumPlan }: AiReportButtonProps) => {
   const [report, setReport] = useState<string | null>(null);
   const [reportIsLoading, setReportIsLoading] = useState(false);
 
@@ -50,30 +51,51 @@ const AiReportButton = ({ month }: AiReportButtonProps) => {
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[600px]">
-        <DialogHeader>
-          <DialogTitle>AI Report</DialogTitle>
-          <DialogDescription>
-            Use artificial intelligence to generate a report with insights about
-            your finances.
-          </DialogDescription>
-        </DialogHeader>
+        {hasPremiumPlan ? (
+          <>
+            <DialogHeader>
+              <DialogTitle>AI Report</DialogTitle>
+              <DialogDescription>
+                Use artificial intelligence to generate a report with insights
+                about your finances.
+              </DialogDescription>
+            </DialogHeader>
 
-        <ScrollArea className="prose max-h-[450px] text-white prose-h3:text-white prose-h4:text-white prose-strong:text-white">
-          <Markdown>{report}</Markdown>
-        </ScrollArea>
+            <ScrollArea className="prose max-h-[450px] text-white prose-h3:text-white prose-h4:text-white prose-strong:text-white">
+              <Markdown>{report}</Markdown>
+            </ScrollArea>
 
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="ghost">Cancel</Button>
-          </DialogClose>
-          <Button
-            onClick={handleGenerateReportClick}
-            disabled={reportIsLoading}
-          >
-            {reportIsLoading && <Loader2Icon className="animate-spin" />}
-            Generate Report
-          </Button>
-        </DialogFooter>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="ghost">Cancel</Button>
+              </DialogClose>
+              <Button
+                onClick={handleGenerateReportClick}
+                disabled={reportIsLoading}
+              >
+                {reportIsLoading && <Loader2Icon className="animate-spin" />}
+                Generate Report
+              </Button>
+            </DialogFooter>
+          </>
+        ) : (
+          <>
+            <DialogHeader>
+              <DialogTitle>AI Report</DialogTitle>
+              <DialogDescription>
+                You need a premium plan to generate reports with AI.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="ghost">Cancel</Button>
+              </DialogClose>
+              <Button asChild>
+                <Link href="/subscription">Subscribe to Premium Plan</Link>
+              </Button>
+            </DialogFooter>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   );

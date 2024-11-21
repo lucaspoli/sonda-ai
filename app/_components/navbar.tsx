@@ -28,14 +28,15 @@ const Navbar = () => {
           <Link
             key={link.href}
             href={link.href}
-            className={buttonVariants({ variant: "ghost" })} // Deixe todos os links consistentes
+            className={buttonVariants({ variant: "ghost" })}
           >
             {link.label}
           </Link>
         ))}
       </div>
-
-      <UserButton showName />
+      <div>
+        <UserButton showName />
+      </div>
     </nav>
   );
 };

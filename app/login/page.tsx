@@ -20,18 +20,18 @@ const LoginPage = async () => {
   }
 
   return (
-    <div className="grid h-full grid-cols-2 p-7">
+    <div className="grid h-full grid-cols-[60%_40%] p-7">
       <div className="relative h-full w-full">
         <Image
-          src="/background-login.png"
+          src="/background-login.webp"
           alt="Background login page"
           fill
-          className="rounded-3xl object-cover"
+          className="scale-x-[-1] rounded-3xl object-cover"
           draggable="false"
         />
       </div>
       <div className="flex h-full flex-col items-center justify-center">
-        <Card className="w-full max-w-[450px]">
+        <Card className="w-full max-w-[400px] rounded-3xl bg-white bg-opacity-5 px-6 py-11">
           <CardHeader>
             <Image
               src="/logo-sonda.svg"
